@@ -7,7 +7,15 @@
     <title>Flask Contact Form</title>
 </head>
 <body>
-   <h style="text-algin:center"> Contact Form </h>
+   <h2 style="text-align-last: center"> Contact Form </h2>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+              {% for message in messages %}
+                 <p>{{ message }}</p>
+              {% endfor %}
+        {% endif %}
+        {% endwith %}
 
       {% for message in form.name.errors %}
            <div>{{ message }}</div>

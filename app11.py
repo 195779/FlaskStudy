@@ -11,9 +11,11 @@ def contact():
     form1 = ContactForm()
     if request.method == 'POST':
         if form1.validate() == False:
-            flash("All fileds are required.")
+            flash('Exist fields are not ready.')
+            print("ddd")
             return render_template('contact11.html',form=form1)
         else:
+            flash("All fileds are ready.")
             return render_template('success11.html')
     elif request.method == 'GET':
         return render_template('contact11.html',form=form1)
