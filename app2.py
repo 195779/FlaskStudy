@@ -12,12 +12,14 @@ def index():
         'age' : 28
     }
 
-    ### render_template方法：渲染模板
-    ### 参数1：模板名称；参数n：传到模板中的数据
+    # render_template方法：渲染模板
+    # 参数1：模板名称；参数n：传到模板中的数据
     return render_template('app2.html',
                            my_int = t_int,
                            my_str = t_str,
                            my_list = t_list,
                            my_dict = t_dict)
+
+
 if __name__ == '__main__':
-    app.run(debug = True)
+    Flask.run(debug=True)
