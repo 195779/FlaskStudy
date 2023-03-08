@@ -11,6 +11,8 @@ from form11 import ContactForm
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///contacts.db"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_COMMIT_TEARDOWN'] = True
 secretKey = os.urandom(32)
 app.config['SECRET_KEY'] = secretKey
 
@@ -30,18 +32,18 @@ class ContactDAO(db.Model):
     email = db.Column(db.String(50))
     age = db.Column(db.Integer)
     language = db.Column(db.String(5))
-    data_created = db.Column(db.DateTime, default=datetime.now)
-
+    createdate = db.Column(db.DateTime, default=datetime.now)
+    updatedate = db.Column(db.DateTime, default=datetime.now)
+    # 这里使用datetime.now不报错
     # 默认值为本地时间 datetime.now 获取 python 环境自带的本地当前时间
 
-    def __init__(self, name, gender, address, email, age, language, data_created):
+    def __init__(self, name, gender, address, email, age, language):
         self.name = name
         self.gender = gender
         self.address = address
         self.email = email
         self.age = age
         self.language = language
-        self.data_created = data_created
 
 
 @app.route('/')
@@ -67,7 +69,6 @@ def do_add():
                                  form1.email.data,
                                  form1.Age.data,
                                  form1.language.data,
-                                 datetime.now()
                                  )
             try:
                 db.session.add(contact)
@@ -119,10 +120,12 @@ def do_update(id):
         to_update.gender = form1.Gender.data
         to_update.address = form1.Address.data
         to_update.email = form1.email.data
+        to_update.age = form1.Age.data
         to_update.language = form1.language.data
-        # to_update.data_created = datetime.now()
+        to_update.updatedate = datetime.now()
+        # 这里更新时间，使用datetime.now显示类型错误，使用now()可以
         try:
-            #db.session.update(to_update)
+            # db.session.update(to_update)
             db.session.commit()
             # 返回根目录显示全部
         except Exception as e:
@@ -131,6 +134,7 @@ def do_update(id):
 
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(debug=True, threaded=True)
 
 
