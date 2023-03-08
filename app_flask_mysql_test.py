@@ -5,10 +5,9 @@ flask_mysql_test 实例演示
 from flask import Flask, request, flash, redirect, render_template,url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import pymysql
 
 import os
-from form11 import ContactForm
+from Blili_test.form11 import ContactForm
 
 app = Flask(__name__)
 # 设置数据库链接地址
@@ -22,11 +21,14 @@ app.config['SQLALCHEMY_ECHO'] = True
 
 secretKey = os.urandom(32)
 app.config['SECRET_KEY'] = secretKey
+# 涉及的表单的提交（WTF），为防止CSRF攻击，必须要提供secretKey（否则会报错提醒）
 
 db = SQLAlchemy(app)
 
 
 class contact(db.Model):
+    # Flask中使用mysql作为数据库，在py文件中创建表格（类）的方法比直接在本地mysql中创建表格要方便得多
+    # 主要方便直接对table作为对象来执行操作
     id = db.Column(db.Integer, primary_key=True)
     # id为主键
     name = db.Column(db.String(50))
