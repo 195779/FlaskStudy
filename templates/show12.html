@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X_UA_Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>show页面；Sqlalchemy 演示实例</title>
+    <style>
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #abdde5;
+        }
+    </style>
+</head>
+<body>
+<h2 style='text-align-last: center;'>Show Contact</h2>
+{% with  messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<h3> Contacts (<a href="{{ url_for('do_add') }}" target="_blank">Add Contact</a>) </h3>
+<table>
+    <thread>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Language</th>
+            <th>Create Date</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thread>
+    <tbody>
+    {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.gender }}</td>
+            <td>{{ contact.address }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.age }}</td>
+            <td>{{ contact.language }}</td>
+            <td>{{ contact.date_created }}</td>
+            <td><a href="/update/{{ contact.id }}"> update </a></td>
+            <td><a href="/delete/{{ contact.id }}"> delete </a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
