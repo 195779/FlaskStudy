@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.username }}</title>
+</head>
+<body>
+
+<a href = "{{ url_for('hello_world') }}" >&larr; Return</a>
+<h2>{{ user.username }}</h2>
+
+{% if user.bio %}
+    <i>{{ user.bio }}</i>
+{% else %}
+    <i>This user has not provided a bio.</i>
+{% endif %}
+
+{# 下面是电影清单 #}
+<h5> {{ user.username }}'s Watchlist ({{ movies|length }}) : </h5>
+<ul>
+    {% for movie in movies %}
+        <li>{{ movie.name }} - {{ movie.year }}</li>
+    {% endfor %}
+</ul>
+<div>
+    <h2>测试上下文处理函数</h2>
+    <h4>foo 变量为：{{ foo }}</h4>
+    <h4>当我们调用render_template函数渲染任意一个模板的时候，所有使用app.context.processor装饰器注册的上下文处理函数（包括Flask内置的上下文处理函数）都会被执行
+    这些函数的返回值会被添加到模板中，因此我们可以在模板中直接使用foo变量</h4>
+</div>
+<div>
+    <h2>测试模板内置的全局函数 range 用法同python</h2>
+    <p>the range(0,5,1)</p>
+    {% for i in range(0,5,1) %}
+    <li>the i is {{ i }}</li>
+    {% endfor %}
+    <p>the range(5,0,-1) </p>
+    {% for j in range(5,0,-1) %}
+    <li>the j is {{ j }}</li>
+    {% endfor %}
+</div>
+<div>
+    <h2>测试模板内置的全局函数 lipsum 随机生成文本，默认生成5段HTML文本每段20-100单词</h2>
+    {{lipsum(n=5,html=True,min=20,max=100)}}
+</div>
+<div>
+    <h2>测试自定义全局函数 用@app.template_global()标注</h2>
+    <p>the bar message is : {{ bar() }} </p>
+</div>
+<div>
+    <h2>内置过滤器：大写转换</h2>
+    {% filter upper %}
+        the text becomes upper!
+    {% endfilter %}
+</div>
+<div>
+    <h2>测试 自定义测试器</h2>
+    {% if not '125' is baz %}
+        <p>自定义测试器测试成功！</p>
+    {% endif %}
+</div>
+
+<div>
+    <h2>测试 jinja的自定义全局函数、自定义全局变量</h2>
+    <p>the bar is : {{ bar_environment() }}</p>
+    <p>the foo is : {{ foo_environment }}</p>
+</div>
+<div>
+    <h2>测试Jinja的自定义过滤器</h2>
+    <p>{{ 'Alan is smiling' | smiling }}</p>
+</div>
+<div>
+    <h2>测试 Jinja的自定义测试器</h2>
+    {% if 'baz' is baz %}
+        <p>自定义测试器测试成功！</p>
+    {% endif %}
+</div>
+</body>
+</html>
