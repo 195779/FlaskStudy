@@ -1,6 +1,6 @@
 from flask import Flask,render_template
 # 模板
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates')
 
 @app.route('/')
 def index():
@@ -14,7 +14,7 @@ def index():
 
     # render_template方法：渲染模板
     # 参数1：模板名称；参数n：传到模板中的数据
-    return render_template('Blili_test/app2.html',
+    return render_template('Blili_test_templates/app2.html',
                            my_int = t_int,
                            my_str = t_str,
                            my_list = t_list,

@@ -1,10 +1,10 @@
-from flask import Flask, url_for, request, redirect, make_response, Markup  # 从 flask 包导入 Flask类
+from flask import Flask, url_for, request, redirect, make_response, Markup, render_template # 从 flask 包导入 Flask类
 # 这个类表示一个Flask程序，实例化这个类，就得到我们的程序实例app
 # 传入Flask类构造方法的第一个参数是模块或者包的名称。
 # 使用特殊变量 __name__ Python会根据所处的模块来赋予 __name__ 变量相应的值
 from urllib.parse import urlparse, urljoin  # URL 安全性处理
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates')
 
 
 # 注册路由
@@ -148,6 +148,11 @@ def show_post():
 def load_post():
     # 点击 load more 之后，在执行/more的视图函数，返回一段随机文本 插入到 post界面中
     return generate_lorem_ipsum(n=1)
+
+
+@app.route('/test')
+def test():
+    return render_template('Blili_test_templates/login8.html')
 
 
 if __name__ == '__main__':

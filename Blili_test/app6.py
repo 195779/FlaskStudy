@@ -5,12 +5,12 @@ Flask 重定向和错误
 （表单的定义依然位于HTML中）
 '''
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates')
 
 
 @app.route('/')
 def index():
-    return render_template('Blili_test/app6.html')
+    return render_template('Blili_test_templates/app6.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])

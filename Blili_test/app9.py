@@ -3,13 +3,13 @@ from flask import Flask,flash,redirect,\
 '''Flask 消息闪现'''
 import os
 secretKey = os.urandom(32)
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates')
 app.secret_key = secretKey
 
 
 @app.route('/')
 def index():
-    return render_template('Blili_test/app8.html')
+    return render_template('Blili_test_templates/app8.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -23,7 +23,7 @@ def login():
             flash("用户名与密码都为 'admin' ,登录成功 You are successfully logged in")
             return redirect(url_for('index'))
 
-    return render_template('Blili_test/login8.html', error=errorMessage)
+    return render_template('Blili_test_templates/login8.html', error=errorMessage)
     # GET 或者 POST 中username与password不全为admin的时候，返回login8.html,给error变量赋值errorMessage
 
 

@@ -5,7 +5,7 @@ from flask import Flask,session,redirect,url_for,request
 
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates')
 secretKey = os.urandom(32)
 app.secret_key = secretKey
 # 生成随机数加密session，sessionID存在于客户端，Session存在于服务器
@@ -31,7 +31,7 @@ def login():
 
     elif request.method == 'GET':
         # 请求服务：返回app7.html
-        return render_template('Blili_test/app7.html')
+        return render_template('Blili_test_templates/app7.html')
 
 
 @app.route('/logout')
