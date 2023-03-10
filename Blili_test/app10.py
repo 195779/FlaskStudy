@@ -12,7 +12,7 @@ app.config['UPLOAD_FOLDER'] = 'uploaddir/'
 
 @app.route('/')
 def upload_file():
-    return render_template('upload10.html')
+    return render_template('Blili_test/upload10.html')
 
 
 @app.route('/uploader', methods=['POST', 'GET'])
@@ -24,7 +24,7 @@ def uploader():
         # 文件上传到文件夹uploaddir
         return 'file uploaded successfully'
     elif request.method == 'GET':
-        return render_template('upload10.html')
+        return render_template('Blili_test/upload10.html')
 
 
 if __name__ == '__main__':

@@ -51,7 +51,7 @@ class contact(db.Model):
 
 @app.route('/')
 def show_all():
-    return render_template('app_flask_mysql_test_show.html', contacts=contact.query.all())
+    return render_template('app_flask_mysql_test/app_flask_mysql_test_show.html', contacts=contact.query.all())
     # HTML 中的 add 按钮的 target 属性改为 _self 在默认当前窗口打开链接
     # _blank 在新窗口打开链接
     # _parent 在父窗口打开链接
@@ -65,7 +65,7 @@ def mysql_add():
             # 未通过输入检查
             flash("Not all fields are ready !")
             print('Not all fields are ready !')
-            return render_template('app_flask_mysql_test_add.html', form=form_mysql_add)
+            return render_template('app_flask_mysql_test/app_flask_mysql_test_add.html', form=form_mysql_add)
             # 继续保持为添加界面，且保留原输入
         else:
             flash('All fields are ready !')
@@ -87,10 +87,10 @@ def mysql_add():
                 # 添加成功，调回 show_all 视图，查询并显示全部
             except Exception as e:
                 flash("There is an issue adding contact into db. {0}".format(e))
-                return render_template('add12.html', form=form_mysql_add)
+                return render_template('Blili_test/add12.html', form=form_mysql_add)
                 # 添加失败，继续保持为添加界面
     if request.method == 'GET':
-        return render_template('app_flask_mysql_test_add.html', form=form_mysql_add)
+        return render_template('app_flask_mysql_test/app_flask_mysql_test_add.html', form=form_mysql_add)
         # 请求打开添加页面
 
 
@@ -115,7 +115,7 @@ def mysql_update(id):
             # 未通过输入检查
             flash("Not all fields are ready !")
             print('Not all fields are ready !')
-            return render_template('app_flask_mysql_test_update.html', form=form_mysql_update)
+            return render_template('app_flask_mysql_test/app_flask_mysql_test_update.html', form=form_mysql_update)
             # 继续保持为添加界面，且保留原输入
         else:
             to_update.id = id
@@ -139,7 +139,7 @@ def mysql_update(id):
         form_mysql_update.Age.data = to_update.age
         form_mysql_update.language.data = to_update.language
         form_mysql_update.email.data = to_update.email
-        return render_template('app_flask_mysql_test_update.html', form=form_mysql_update)
+        return render_template('app_flask_mysql_test/app_flask_mysql_test_update.html', form=form_mysql_update)
 
     return redirect(url_for('show_all'))
 

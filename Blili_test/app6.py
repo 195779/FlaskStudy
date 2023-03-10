@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('app6.html')
+    return render_template('Blili_test/app6.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])

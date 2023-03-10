@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def student():
-    return render_template('app5.html')
+    return render_template('Blili_test/app5.html')
 
 
 @app.route('/result',methods=['POST', 'GET'])
@@ -18,7 +18,7 @@ def result():
     if request.method == 'POST':
         rst = request.form
         # 取得表单数据
-        return render_template('result5.html', result=rst)
+        return render_template('Blili_test/result5.html', result=rst)
 
 
 if __name__ == '__main__':

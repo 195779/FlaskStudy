@@ -14,7 +14,7 @@ def index():
 
     # render_template方法：渲染模板
     # 参数1：模板名称；参数n：传到模板中的数据
-    return render_template('app2.html',
+    return render_template('Blili_test/app2.html',
                            my_int = t_int,
                            my_str = t_str,
                            my_list = t_list,

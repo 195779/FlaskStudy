@@ -18,14 +18,14 @@ def contact():
             # 做表单检查未通过
             flash('Exist fields are not ready.')
             print("Exist fields are not ready")
-            return render_template('contact11.html', form=form1)
+            return render_template('Blili_test/contact11.html', form=form1)
             # 由于此处 form=form1，所以已经填好的值如果不需要修改则不需要重新填写，它不会被删掉
         else:
             flash("All fields are ready.")
             print("All fields are ready")
-            return render_template('success11.html')
+            return render_template('Blili_test/success11.html')
     elif request.method == 'GET':
-        return render_template('contact11.html', form=form1)
+        return render_template('Blili_test/contact11.html', form=form1)
 
 
 if __name__ == '__main__':

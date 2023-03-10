@@ -31,7 +31,7 @@ def login():
 
     elif request.method == 'GET':
         # 请求服务：返回app7.html
-        return render_template('app7.html')
+        return render_template('Blili_test/app7.html')
 
 
 @app.route('/logout')

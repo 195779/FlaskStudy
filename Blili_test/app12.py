@@ -48,7 +48,7 @@ class ContactDAO(db.Model):
 
 @app.route('/')
 def show_all():
-    return render_template('show12.html', contacts=ContactDAO.query.all())
+    return render_template('Blili_test/show12.html', contacts=ContactDAO.query.all())
     # 查询所有记录并显示
 
 
@@ -60,7 +60,7 @@ def do_add():
             # 未通过输入检查
             flash("All fields are not ready.")
             print("All fields are not ready")
-            return render_template("add12.html", form=form1)
+            return render_template("Blili_test/add12.html", form=form1)
             # 继续保持为添加界面，且保留原输入
         else:
             contact = ContactDAO(form1.name.data,
@@ -79,10 +79,10 @@ def do_add():
                 # 添加成功，调回 show_all 视图，查询并显示全部
             except Exception as e:
                 flash("There is an issue adding contact into db. {0}".format(e))
-                return render_template('add12.html', form=form1)
+                return render_template('Blili_test/add12.html', form=form1)
                 # 添加失败，继续保持为添加界面
     if request.method == 'GET':
-        return render_template('add12.html', form=form1)
+        return render_template('Blili_test/add12.html', form=form1)
         # 请求打开添加界面
 
 
@@ -112,7 +112,7 @@ def do_update(id):
         form1.Age.data = to_update.age
         form1.language.data = to_update.language
         form1.email.data = to_update.email
-        return render_template('update12.html', form=form1)
+        return render_template('Blili_test/update12.html', form=form1)
 
     elif request.method == 'POST':
         to_update.id = id

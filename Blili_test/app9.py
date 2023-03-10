@@ -9,7 +9,7 @@ app.secret_key = secretKey
 
 @app.route('/')
 def index():
-    return render_template('app8.html')
+    return render_template('Blili_test/app8.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -23,7 +23,7 @@ def login():
             flash("用户名与密码都为 'admin' ,登录成功 You are successfully logged in")
             return redirect(url_for('index'))
 
-    return render_template('login8.html', error=errorMessage)
+    return render_template('Blili_test/login8.html', error=errorMessage)
     # GET 或者 POST 中username与password不全为admin的时候，返回login8.html,给error变量赋值errorMessage
 
 
