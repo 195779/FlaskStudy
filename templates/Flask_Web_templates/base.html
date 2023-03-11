@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
+{# 基础模板 #}
+{#
+   当子模板继承基模板之后，子模板会自动包含基模板的内容和机构，在基模板中定义 块 Block ；
+   在子模板中可以通过定义同名的块来执行继承操作
+   block的开始和结束分别使用block和endblock，块之间可以嵌套
+#}
 <head>
     {% block head %}
         <meta charset="utf-8">
-        <title>{% block title %}Template - HelloFlask{% endblock %}</title>
-        {% block styles %}
-        {% endblock %}
+        <title>{% block title %}BaseTemplate{% endblock %}</title>
+        {% block styles %}{% endblock %}
     {% endblock %}
 </head>
 <body>
 <nav>
-    <ul><li><a href="{{ url_for('hello_world') }}">Home</a></li></ul>
+    <ul><li><a href="{{ url_for('hello_world') }}">The hello_world</a></li></ul>
 </nav>
 
 <main>
+    {% for message in get_flashed_messages() %}
+    <div class="alert">{{ message }}</div>
+    {% endfor %}
     {% block content %}{% endblock %}
 </main>
+
 <footer>
     {% block footer %}
 
     {% endblock %}
 </footer>
-{% block scripts %}{% endblock %}
+{% block scripts %}
+
+{% endblock %}
 </body>
 </html>

@@ -54,6 +54,11 @@
     {% endfilter %}
 </div>
 <div>
+    <h2>测试 自定义过滤器</h2>
+    {# name 关键字 默认使用函数名称 #}
+    <p>过滤器测试结果为： {{ "the test name is :"|musical}}</p>
+</div>
+<div>
     <h2>测试 自定义测试器</h2>
     {% if not '125' is baz %}
         <p>自定义测试器baz测试成功！</p>
@@ -67,7 +72,7 @@
 </div>
 <div>
     <h2>测试Jinja的自定义过滤器</h2>
-    <p>{{ 'Alan is smiling' | smiling }}</p>
+    <p>{{ 'Alan is smiling'|smiling }}</p>
 </div>
 <div>
     <h2>测试 Jinja的自定义测试器</h2>

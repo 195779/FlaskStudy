@@ -1,12 +1,15 @@
-from flask import Flask, render_template, url_for, redirect, request, make_response, Markup
+from flask import Flask, render_template, url_for, redirect, request, make_response, flash, Markup
 from urllib.parse import urlparse, urljoin  # URL 安全性处理
+import os
 
 """
 第三章 模板
 """
 
-app = Flask(__name__, template_folder='../templates')
+app = Flask(__name__, template_folder='../templates', static_folder='../static')
 # ../ 返回上一级文件目录
+secretKey = os.urandom(32)
+app.secret_key = secretKey
 
 # 创建模板
 user = {
@@ -82,7 +85,14 @@ def bar():
 #     This text becomes uppercase.
 # {% endfilter %}
 # 过滤器可以叠加使用 <h1> Hello,{{ name|default('陌生人')|title }} ! </h1>
+
+
 # 自定义过滤器,与注册全局函数相似 @app.template_filter()
+def musical(s):
+    return s + Markup(' &#9835;')
+
+
+app.add_template_filter(musical)
 
 
 # 测试器 使用 is 链接变量和测试器
@@ -131,7 +141,27 @@ def baz_environment(n):
 app.jinja_env.tests['baz_environment'] = baz_environment
 
 
+@app.route('/index')
+def index():
+    return render_template('Flask_Web_templates/index.html')
+# base为基模板
+# index为继承自基模板的子模板
 
+
+@app.route('/watchlist_static')
+def watchlist_static():
+    return render_template('Flask_Web_templates/watchlist_with_static.html', user=user, movies=movies)
+
+
+@app.route('/flash')
+def just_flash():
+    flash("This is flash. And How are you ? ")
+    return redirect(url_for('index'))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('Flask_Web_templates/404.html'), 404
 
 
 if __name__ == '__main__':

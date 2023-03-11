@@ -1,18 +1,41 @@
+{#
+   子模板：主页模板
+#}
+
+
 {% extends 'Flask_Web_templates/base.html' %}
+{# extends声明；继承基模板（extends必须是子模板的第一个标签） #}
 {% from 'Flask_Web_templates/macros.html' import qux %}
+{# 导入宏 #}
+
+{% block styles %}
+    {# 使用super函数向父块追加内容 #}
+    {{ super() }}
+    <style>
+        .foo {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
 
 {% block content %}
-
+{# 设置了content的block内容，子模板与基模板的同名的块会覆盖父块的内容 #}
     {% set name='baz' %}
-    <h1>Template</h1>
+    <h1>index_Template</h1>
     <ul>
-        <li><a href="{{ url_for('watchlist') }}">Watchlist</a></li>
+        <li><a href="{{ url_for('watchlist') }}">To the Watchlist</a></li>
         <li>Filter: {{ foo|musical }}</li>
+        {# foo 为全局变量 'I am foo.'    musical为自定义过滤器 #}
         <li>Global: {{ bar() }}</li>
-        <li>Test: {% if name is baz %}I am baz.{% endif %}</li>
-        <li>Macro: {{ qux(amount=1) }}</li>
-        <li><a href="{{ url_for('watchlist_with_static') }}">Watchlist with image and styles.</a></li>
-        <li><a href="{{ url_for('just_flash') }}">Flash something</a></li>
+        {# bar() 为全局函数 #}
+        <li>Test:
+            {% if name is baz %}
+                I am baz.
+            {% endif %}
+        </li>
+        <li>测试Macro: {{ qux(amount=5) }}</li>
+        <li><a href="{{ url_for('watchlist_static') }}" >Watchlist with image and styles</a></li>
+        <li><a href="{{ url_for('just_flash') }}"> Flash Something </a></li>
     </ul>
-
 {% endblock %}

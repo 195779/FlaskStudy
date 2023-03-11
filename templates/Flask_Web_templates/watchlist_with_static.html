@@ -1,0 +1,39 @@
+{% extends 'Flask_Web_templates/base.html' %}
+{% from 'Flask_Web_templates/macros.html' import static_file %}
+{% block title %}{{ user.username }}'s Watchlist Pro{% endblock %}
+
+
+{% block styles %}
+    {{ static_file('css', 'style.css') }}
+    {#<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">#}
+    {#  <link rel="stylesheet"  href="{{ url_for('static', filename='css/bootstrap.min.css') }}"> #}
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+{% endblock %}
+
+{% block scripts %}
+    <script
+            src="https://code.jquery.com/jquery-3.6.4.min.js"
+            integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <h2>
+        <img src="{{ url_for('static', filename='avatar.jpg') }}" width="50"> {{ user.username }}
+    </h2>
+    {% if user.bio %}
+        <i>{{ user.bio }}</i>
+    {% else %}
+        <i>This user has not provided a bio.</i>
+    {% endif %}
+    {# Below is the movie list (this is comment) #}
+    <h5>{{ user.username }}'s Watchlist ({{ movies|length }}):</h5>
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.name }} - {{ movie.year }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
