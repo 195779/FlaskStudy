@@ -431,6 +431,10 @@ small,
 .small {
   font-size: 80%;
   font-weight: 400;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 mark,

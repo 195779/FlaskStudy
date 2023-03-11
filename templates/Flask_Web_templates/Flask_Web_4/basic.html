@@ -1,0 +1,26 @@
+{% extends 'Flask_Web_templates/Flask_Web_4/base.html' %}
+
+{% from 'Flask_Web_templates/Flask_Web_4/macros.html' import form_field %}
+
+{% block content %}
+
+    <form  method="post">
+        {{ form.csrf_token }} <!--渲染CSRF令牌隐藏字段-->
+        {{ form_field(form.username) }}<br>
+        {% if form.username.errors %}
+            {% for message in form.username.errors %}
+                <small class="error">{{ message }}</small><br>
+            {% endfor %}
+        {% endif %}
+        {{ form.password.label }}<br>
+        {{ form.password }}<br>
+        {% if form.password.errors %}
+            {% for message in form.password.errors %}
+                <small class="error">{{ message }}</small><br>
+            {% endfor %}
+        {% endif %}
+        {{ form.remember }}{{ form.remember.label }} <br>
+        {{ form.submit }}<br>
+    </form>
+
+{% endblock %}
