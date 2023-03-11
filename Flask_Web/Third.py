@@ -45,6 +45,8 @@ def watchlist():
 def inject_foo():
     foo = 'I am foo.'
     return dict(foo=foo)  # 等价于 return {'foo' : foo}
+
+
 # 当我们调用 render_template()函数渲染任意一个模板的时候，所有使用 app.context_processor 修饰器注册的
 # 模板上下文函数都会被执行，这些函数的返回值会被添加进 模板 中，因此我们可以在模板中直接使用 foo 变量
 # 还可以将其作为方法调用： app.contxt_processor(inject_foo)  # inject_foo 即前面的 inject_foo 函数
@@ -65,6 +67,8 @@ def inject_foo():
 @app.template_global()
 def bar():
     return "this is the bar of template_global"
+
+
 # 将bar函数注册为全局函数
 # 同样也可以直接调用，以函数名为参数，或者使用lambda表达式
 
@@ -119,7 +123,7 @@ app.jinja_env.filters['smiling'] = smiling
 
 # 添加自定义测试器
 def baz_environment(n):
-    if n=='baz':
+    if n == 'baz':
         return True
     return False
 

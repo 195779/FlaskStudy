@@ -56,7 +56,7 @@
 <div>
     <h2>测试 自定义测试器</h2>
     {% if not '125' is baz %}
-        <p>自定义测试器测试成功！</p>
+        <p>自定义测试器baz测试成功！</p>
     {% endif %}
 </div>
 
@@ -71,8 +71,8 @@
 </div>
 <div>
     <h2>测试 Jinja的自定义测试器</h2>
-    {% if 'baz' is baz %}
-        <p>自定义测试器测试成功！</p>
+    {% if 'baz' is baz_environment %}
+        <p>自定义测试器baz_environment测试成功！</p>
     {% endif %}
 </div>
 </body>
