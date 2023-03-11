@@ -40,7 +40,7 @@ def hello_world():
 
 @app.route('/watchlist')
 def watchlist():
-    return render_template('Flask_Web_templates/watchlist.html', user=user, movies=movies)
+    return render_template('Flask_Web_templates/Flask_Web_3/watchlist.html', user=user, movies=movies)
 
 
 # 注册模板上下文处理函数
@@ -143,14 +143,14 @@ app.jinja_env.tests['baz_environment'] = baz_environment
 
 @app.route('/index')
 def index():
-    return render_template('Flask_Web_templates/index.html')
+    return render_template('Flask_Web_templates/Flask_Web_3/index.html')
 # base为基模板
 # index为继承自基模板的子模板
 
 
 @app.route('/watchlist_static')
 def watchlist_static():
-    return render_template('Flask_Web_templates/watchlist_with_static.html', user=user, movies=movies)
+    return render_template('Flask_Web_templates/Flask_Web_3/watchlist_with_static.html', user=user, movies=movies)
 
 
 @app.route('/flash')
@@ -161,7 +161,7 @@ def just_flash():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('Flask_Web_templates/404.html'), 404
+    return render_template('Flask_Web_templates/Flask_Web_3/404.html'), 404
 
 
 if __name__ == '__main__':
