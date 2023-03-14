@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>multi forms Demo</title>
+</head>
+<body>
+<div>
+    {% with messages =  get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}<p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+<div  style="width: 700px; margin: auto">
+    <h1>multi forms Demo</h1>
+    <form method="post">
+        {{ signIn_form.csrf_token }}
+        {{ signIn_form.username.label }}<br>
+        {{ signIn_form.username }}<br><br>
+        {{ signIn_form.password.label }}<br>
+        {{ signIn_form.password }}<br><br>
+        {{ signIn_form.submit1}}<br><br><br><br>
+    </form>
+    <form method="post">
+        {{ register_form.csrf_token }}
+        {{ register_form.username.label }}<br>
+        {{ register_form.username }}<br><br>
+        {{ register_form.email.label }}<br>
+        {{ register_form.email}}<br><br>
+        {{ register_form.password.label }}<br>
+        {{ register_form.password }}<br><br>
+        {{ register_form.submit2 }}<br><br><br><br>
+    </form>
+</div>
+{{ ckeditor.load() }}
+{{ ckeditor.config(name='body') }}
+</body>
+</html>

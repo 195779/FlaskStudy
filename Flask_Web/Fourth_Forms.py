@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField,TextAreaField
 from flask_wtf.file import FileRequired, FileAllowed, FileField
 from wtforms.validators import DataRequired, Length, ValidationError
+from flask_ckeditor import CKEditorField
 
 
 class LoginForm(FlaskForm):
@@ -35,3 +36,40 @@ class MultiUploadForm(FlaskForm):
     photo = FileField('Upload Image', validators={DataRequired()})
     # DataRequired 确保包含文件
     submit = SubmitField()
+
+
+class RichTextForm(FlaskForm):
+    title = StringField("Title", validators=[DataRequired(), Length(1, 50)])
+    body = CKEditorField('Body', validators=[DataRequired()])
+    submit = SubmitField('Publish')
+
+
+class NewPostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired(), Length(1, 50)])
+    body = TextAreaField('Body', validators=[DataRequired()])
+    save = SubmitField('Save')
+    publish = SubmitField('Publish')
+
+
+class SignForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(1, 20)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(8, 28)])
+    submit1 = SubmitField('Sign in')
+
+
+class RegisterForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(1, 20)])
+    email = StringField('Email', validators=[DataRequired(), Length(1, 254)])
+    password = StringField('Password', validators=[DataRequired(), Length(8,128)])
+    submit2 = SubmitField("Register")
+
+
+class SignForm2(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(1, 20)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(8, 28)])
+    submit1 = SubmitField('Sign in')
+
+class RegisterForm2(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(1, 20)])
+    password = StringField('Password', validators=[DataRequired(), Length(8, 128)])
+    submit2 = SubmitField("Register")

@@ -5,7 +5,8 @@ from flask import Flask, send_from_directory, render_template, redirect, url_for
 from flask_wtf.csrf import validate_csrf
 from wtforms import ValidationError
 
-from Fourth_Forms import LoginForm, UploadForm, MultiUploadForm
+from Fourth_Forms import LoginForm, UploadForm, MultiUploadForm, \
+    RichTextForm, NewPostForm, SignForm, RegisterForm, SignForm2, RegisterForm2
 import os
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
@@ -117,6 +118,93 @@ def multi_upload():
         return redirect(url_for('show_images'))
     else:
         return render_template('Flask_Web_templates/Flask_Web_4/upload.html', form=form)
+
+
+from flask_ckeditor import CKEditor
+
+ckeditor = CKEditor(app)
+app.config['CKEDITOR_SERVE_LOCAL'] = True
+app.config['CKEDITOR_HEIGHT'] = 400
+
+
+# 使用内置本地资源
+
+
+@app.route('/ckeditor', methods=['GET', 'POST'])
+def integrate_ckeditor():
+    form = RichTextForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        body = form.body.data
+        flash('Your post is published!')
+        return render_template('Flask_Web_templates/Flask_Web_4/post.html', title=title, body=body)
+    return render_template('Flask_Web_templates/Flask_Web_4/ckeditor.html', form=form)
+
+
+@app.route('/two-submits', methods=['POST', "GET"])
+def two_submits():
+    form = NewPostForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        body = form.body.data
+
+        if form.save.data:
+            flash("You click the 'Save' button")
+        elif form.publish.data:
+            flash("You save the 'Publish' button")
+            return render_template('Flask_Web_templates/Flask_Web_4/post.html', title=title, body=body)
+    return render_template("Flask_Web_templates/Flask_Web_4/2submit.html", form=form)
+
+
+@app.route('/multi-form', methods=["POST", "GET"])
+def multi_form():
+    signIn_Form = SignForm()
+    register_Form = RegisterForm()
+
+    if signIn_Form.submit1.data and signIn_Form.validate_on_submit():
+        username_sign = signIn_Form.username.data
+        nameString_sign = "the sign_in username is : %s " % username_sign
+        flash(nameString_sign)
+    if register_Form.submit2.data and register_Form.validate_on_submit():
+        username_register = register_Form.username.data
+        nameString_register = "the  register username is : %s " % username_register
+        flash(nameString_register)
+    return render_template("Flask_Web_templates/Flask_Web_4/2Form.html",
+                           register_form=register_Form, signIn_form=signIn_Form)
+
+
+
+@app.route('/multi-form-multi-view')
+def multi_form_multi_view():
+    signIn_form = SignForm2()
+    register_form = RegisterForm2()
+
+    return render_template('Flask_Web_templates/Flask_Web_4/2form2view.html', signIn_form=signIn_form, register_form=register_form)
+
+
+@app.route('/handle-signin', methods=["POST"])
+def handle_signin():
+    signIn_form = SignForm2()
+    register_form = RegisterForm2()
+
+    if signIn_form.validate_on_submit():
+        username = signIn_form.username.data
+        flash('%s, you just submit the SignIn Form.' % username)
+        return redirect(url_for('integrate_ckeditor'))
+    return render_template('Flask_Web_templates/Flask_Web_4/2form2view.html', signIn_form=signIn_form, register_form=register_form)
+
+
+@app.route('/handle-register', methods=["POST"])
+def handle_register():
+    signIn_form = SignForm2()
+    register_form = RegisterForm2()
+
+    if register_form.validate_on_submit():
+        username = register_form.username.data
+        flash('%s, you just submit the Register Form.' % username)
+        return redirect(url_for('integrate_ckeditor'))
+    return render_template('Flask_Web_templates/Flask_Web_4/2form2view.html', signIn_form=signIn_form, register_form=register_form)
+
 
 
 if __name__ == '__main__':
