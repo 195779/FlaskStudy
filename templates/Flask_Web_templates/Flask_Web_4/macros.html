@@ -1,6 +1,7 @@
 {% macro form_field(field) %}
     {{ field.label }}<br>
-    {{ field(**kwargs) }}<br>
+    <input type="file" id="photo" name="photo" multiple><br>
+    <!---重点在此处的 multiple -->
     {% if field.errors -%}
         {% for error in field.errors -%}
             <small class="error">{{ error }}</small><br>

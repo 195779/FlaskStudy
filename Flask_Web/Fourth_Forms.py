@@ -27,4 +27,11 @@ class FortyTwoForm(FlaskForm):
 
 class UploadForm(FlaskForm):
     photo = FileField('Upload Image', validators=[FileRequired(), FileAllowed(['jpg', 'png', 'gif'])])
+    # 检测文件类型
+    submit = SubmitField()
+
+
+class MultiUploadForm(FlaskForm):
+    photo = FileField('Upload Image', validators={DataRequired()})
+    # DataRequired 确保包含文件
     submit = SubmitField()
