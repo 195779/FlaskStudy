@@ -27,35 +27,19 @@
     <fieldset>
         <legend>Contact Form</legend>
         {{ form.hidden_tag() }}
-
         <div style="font-size:20px;font-weight:bold;margin-left: 150px;">
-            {{ form.name.label }}
-            <br>
-            {{ form.name }}
-            <br>
-
-            {{ form.Gender.label }}
-            <br>
-            {{ form.Gender }}
-            <br>
-
-            {{ form.Address.label }}
-            <br>
-            {{ form.Address }}
-            <br>
-
-            {{ form.email.label }}
-            <br>
-            {{ form.email }}
-            <br>
-            {{ form.Age.label }}
-            <br>
-            {{ form.Age }}
-            <br>
-            {{ form.language.label }}
-            <br>
-            {{ form.language }}
-            <br>
+            {{ form.name.label }}<tr>
+            {{ form.name }}<br><br>
+            {{ form.Gender.label }}<tr>
+            {{ form.Gender }}<br><br>
+            {{ form.Address.label }}<tr>
+            {{ form.Address }}<br><br>
+            {{ form.email.label }}<tr>
+            {{ form.email }}<br><br>
+            {{ form.Age.label }}<tr>
+            {{ form.Age }}<br><br>
+            {{ form.language.label }}<tr>
+            {{ form.language }}<br><br>
             {{ form.submit }}
         </div>
     </fieldset>
