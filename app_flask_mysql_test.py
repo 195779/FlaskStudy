@@ -38,8 +38,9 @@ class contact(db.Model):
     email = db.Column(db.String(50))
     age = db.Column(db.Integer)
     language = db.Column(db.String(5))
-    createDate = db.Column(db.DateTime, default=datetime.now)
-    updateDate = db.Column(db.DateTime, default=datetime.now)
+    createDate = db.Column(db.Date(), default=datetime.now)
+    updateDate = db.Column(db.Time(), default=datetime.now)
+    # Date()  Time()  DateTime()
 
     def __init__(self, name, gender, address, email, age, language):
         self.name = name
@@ -52,7 +53,18 @@ class contact(db.Model):
 
 @app.route('/')
 def show_all():
-    return render_template('app_flask_mysql_test_templates/app_flask_mysql_test_show.html', contacts=contact.query.all())
+    contacts = contact.query.all()
+    if contacts:
+        for contact_test in contacts:
+            print("createDate_year: "+str(contact_test.createDate.year), "type: " + str(type(contact_test.createDate.year)))
+            print("createDate_month："+str(contact_test.createDate.month), "type: " + str(type(contact_test.createDate.month)))
+            print("createDate_day: " +str(contact_test.createDate.day), "type: "+str(type(contact_test.createDate.day)))
+            print("updateDate_hour: "+str(contact_test.updateDate.hour), "type: "+str(type(contact_test.updateDate.hour)))
+            print("updateDate_minute: "+str(contact_test.updateDate.minute), "type: "+str(type(contact_test.updateDate.minute)))
+            print("updateDate_minute: "+str(contact_test.updateDate.second), "type: "+str(type(contact_test.updateDate.second)))
+        return render_template('app_flask_mysql_test_templates/app_flask_mysql_test_show.html', contacts=contacts)
+    else:
+        return render_template("app_flask_mysql_test_templates/app_flask_mysql_test_show.html",contacts=None)
     # HTML 中的 add 按钮的 target 属性改为 _self 在默认当前窗口打开链接
     # _blank 在新窗口打开链接
     # _parent 在父窗口打开链接

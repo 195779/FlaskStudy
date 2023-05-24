@@ -20,7 +20,7 @@ def index():
     return "您暂时未登录，<br><a href = '/login'> <b>点击这里登录</b></a>"
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         # 提交username：将username写入session中，返回index视图
@@ -28,10 +28,11 @@ def login():
         print(request.form['username'])
         # 注意都是中括号括起来的
         return redirect(url_for('index'))
-
     elif request.method == 'GET':
         # 请求服务：返回app7.html
         return render_template('Blili_test_templates/app7.html')
+    else:
+        return "not page"
 
 
 @app.route('/logout')

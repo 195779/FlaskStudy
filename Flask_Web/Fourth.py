@@ -37,7 +37,8 @@ def bootstrap():
         username = form.username.data
         flash('Welcome home %s!' % username)
         # base.html 中 在 block content 之前接收了 flash 的 messages 则会显示在其之前
-        return redirect(url_for('postSuccess'))
+        # return redirect(url_for('postSuccess'))
+        return render_template('Flask_Web_templates/Flask_Web_4/postsuccess.html')
     else:
         return render_template("Flask_Web_templates/Flask_Web_4/bootstrap.html", form=form)
 
